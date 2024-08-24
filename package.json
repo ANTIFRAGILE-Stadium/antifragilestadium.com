@@ -15,6 +15,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@googleapis/youtube": "^19.0.0",
     "@next/env": "14.2.4",
     "@sanity/assist": "^3.0.6",
     "@sanity/demo": "2.0.0",

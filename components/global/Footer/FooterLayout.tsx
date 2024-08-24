@@ -12,7 +12,7 @@ export default function Footer(props: FooterProps) {
   return (
     <footer className="bottom-0 flex flex-wrap items-center gap-x-5 bg-white/80 px-4 py-12 backdrop-blur md:px-16 md:py-20 lg:px-32">
       {footer && (
-        <CustomPortableText paragraphClasses="text-md " value={footer} />
+        <CustomPortableText paragraphClasses="text-md" value={footer} />
       )}
     </footer>
   )

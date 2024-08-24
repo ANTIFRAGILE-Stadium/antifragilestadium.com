@@ -64,3 +64,20 @@ export interface SettingsPayload {
   menuItems?: MenuItem[]
   ogImage?: Image
 }
+
+export interface ConcertPayload {
+  title: string
+  coverImageUrl: string
+  date: string
+  site: string
+  tags: string[]
+}
+
+export interface ConcertPayloadMutation extends ConcertPayload {
+  _id: string
+  _type: 'concert'
+}
+
+export interface SanityMutation<T> {
+  createOrReplace: T
+}
