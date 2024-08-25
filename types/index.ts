@@ -32,7 +32,7 @@ export interface ShowcaseProject {
 export interface HomePagePayload {
   footer?: PortableTextBlock[]
   overview?: PortableTextBlock[]
-  showcaseProjects?: ShowcaseProject[]
+  recentConcerts?: ConcertPayload[]
   title?: string
 }
 
@@ -66,6 +66,7 @@ export interface SettingsPayload {
 }
 
 export interface ConcertPayload {
+  _id: string
   title: string
   coverImageYTThumbnail: {
     url: string

@@ -9,6 +9,7 @@ interface ImageBoxProps {
   height?: number
   size?: string
   classesWrapper?: string
+  rawImageUrl?: string
   'data-sanity'?: string
 }
 
@@ -19,10 +20,12 @@ export default function ImageBox({
   height = 2000,
   size = '100vw',
   classesWrapper,
+  rawImageUrl,
   ...props
 }: ImageBoxProps) {
   const imageUrl =
-    image && urlForImage(image)?.height(height).width(width).fit('crop').url()
+    rawImageUrl ||
+    (image && urlForImage(image)?.height(height).width(width).fit('crop').url())
 
   return (
     <div

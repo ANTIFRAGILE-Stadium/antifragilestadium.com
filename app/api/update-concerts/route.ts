@@ -59,10 +59,10 @@ export async function PUT(request: NextRequest) {
       !video.snippet ||
       !video.snippet.title ||
       !video.snippet.thumbnails ||
-      !video.snippet.thumbnails.standard ||
-      !video.snippet.thumbnails.standard.url ||
-      !video.snippet.thumbnails.standard.width ||
-      !video.snippet.thumbnails.standard.height ||
+      !video.snippet.thumbnails.maxres ||
+      !video.snippet.thumbnails.maxres.url ||
+      !video.snippet.thumbnails.maxres.width ||
+      !video.snippet.thumbnails.maxres.height ||
       !video.snippet.publishedAt ||
       !video.snippet.resourceId ||
       !video.snippet.resourceId.videoId ||
@@ -77,9 +77,9 @@ export async function PUT(request: NextRequest) {
       _type: 'concert',
       title: video.snippet.title,
       coverImageYTThumbnail: {
-        url: video.snippet.thumbnails.standard.url,
-        width: video.snippet.thumbnails.standard.width,
-        height: video.snippet.thumbnails.standard.height,
+        url: video.snippet.thumbnails.maxres.url,
+        width: video.snippet.thumbnails.maxres.width,
+        height: video.snippet.thumbnails.maxres.height,
       },
       date: video.snippet.publishedAt.split('T')[0],
       site: `https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`,
