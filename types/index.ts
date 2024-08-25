@@ -67,7 +67,11 @@ export interface SettingsPayload {
 
 export interface ConcertPayload {
   title: string
-  coverImageUrl: string
+  coverImageYTThumbnail: {
+    url: string
+    width: number
+    height: number
+  }
   date: string
   site: string
   tags: string[]

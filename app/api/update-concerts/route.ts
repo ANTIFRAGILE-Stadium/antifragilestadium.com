@@ -61,6 +61,8 @@ export async function PUT(request: NextRequest) {
       !video.snippet.thumbnails ||
       !video.snippet.thumbnails.standard ||
       !video.snippet.thumbnails.standard.url ||
+      !video.snippet.thumbnails.standard.width ||
+      !video.snippet.thumbnails.standard.height ||
       !video.snippet.publishedAt ||
       !video.snippet.resourceId ||
       !video.snippet.resourceId.videoId ||
@@ -74,7 +76,11 @@ export async function PUT(request: NextRequest) {
       _id: video.snippet.resourceId.videoId,
       _type: 'concert',
       title: video.snippet.title,
-      coverImageUrl: video.snippet.thumbnails.standard.url,
+      coverImageYTThumbnail: {
+        url: video.snippet.thumbnails.standard.url,
+        width: video.snippet.thumbnails.standard.width,
+        height: video.snippet.thumbnails.standard.height,
+      },
       date: video.snippet.publishedAt.split('T')[0],
       site: `https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`,
       tags: ['TODO'],

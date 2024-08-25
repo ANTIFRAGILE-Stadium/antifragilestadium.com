@@ -17,10 +17,29 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'coverImageUrl',
-      title: 'Cover Image URL',
-      type: 'url',
-      validation: (rule) => rule.required(),
+      name: 'coverImageYTThumbnail',
+      title: 'Cover Image YouTube Thumbnail',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'url',
+          title: 'URL',
+          type: 'url',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'width',
+          title: 'Width',
+          type: 'number',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'height',
+          title: 'Height',
+          type: 'number',
+          validation: (rule) => rule.required(),
+        }),
+      ],
     }),
     defineField({
       name: 'date',
