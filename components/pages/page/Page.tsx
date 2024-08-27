@@ -19,12 +19,12 @@ export function Page({ data }: PageProps) {
         {/* Body */}
         {body && (
           <CustomPortableText
-            paragraphClasses="font-serif max-w-3xl text-gray-600 text-xl"
+            paragraphClasses="font-serif max-w-3xl text-gray-600 dark:text-gray-400 text-xl"
             value={body}
           />
         )}
       </div>
-      <div className="absolute left-0 w-screen border-t" />
+      <div className="absolute left-0 w-screen border-t dark:border-gray-600" />
     </div>
   )
 }

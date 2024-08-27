@@ -22,7 +22,7 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
       {title && <Header description={overview} />}
       {/* Showcase projects */}
       {recentConcerts && recentConcerts.length > 0 && (
-        <div className="mx-auto max-w-[100rem] rounded-md border">
+        <div className="mx-auto max-w-[100rem] rounded-md border dark:border-gray-600">
           {recentConcerts.map((concert, i) => (
             <a href={concert.site} key={concert._id} target="_blank">
               <ConcertListItem data={concert} odd={i % 2} />
