@@ -52,6 +52,17 @@ function extractWordBetweenStadiumAndStage(text) {
   }
 }
 
+function getArtistListStringByCommaAndSpaceAndRemoveDuplicates(text) {
+  // Split the string by commas and trim any extra spaces around each item
+  const items = text.split(',').map((item) => item.trim())
+
+  // Use a Set to remove duplicates
+  const uniqueItems = [...new Set(items)]
+
+  // Join the unique items back into a comma-separated string
+  return uniqueItems.join(', ')
+}
+
 export async function PUT(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
   if (
@@ -127,8 +138,8 @@ export async function PUT(request: NextRequest) {
       _id: video.snippet.resourceId.videoId,
       _type: 'concert',
       title: video.snippet.title,
-      description: getArtistsFromSetlistText(video.snippet.description).join(
-        ', ',
+      description: getArtistListStringByCommaAndSpaceAndRemoveDuplicates(
+        getArtistsFromSetlistText(video.snippet.description).join(', '),
       ),
       coverImageYTThumbnail: {
         url: video.snippet.thumbnails.maxres.url,
