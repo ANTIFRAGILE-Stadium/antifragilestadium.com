@@ -17,6 +17,11 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    }),
+    defineField({
       name: 'coverImageYTThumbnail',
       title: 'Cover Image YouTube Thumbnail',
       type: 'object',

@@ -2,6 +2,45 @@ import { ConcertPayloadMutation, SanityMutation } from '@/types'
 import { youtube } from '@googleapis/youtube'
 import { NextRequest, NextResponse } from 'next/server'
 
+function extractSetlistText(text: string) {
+  // Regex to extract everything under "SETLIST"
+  const regex = /SETLIST\s*([\s\S]*?)(?:VIDEOS|CREW|SOFTWARE|THANK YOU|$)/
+  const match = text.match(regex)
+
+  if (match) {
+    return match[1].trim()
+  } else {
+    return null
+  }
+}
+
+function extractArtistsFromSetlist(setlist: string) {
+  // Regex to extract the artists after the "-" character
+  const regex = /-\s*([^-\n]+)/g
+  const artists: string[] = []
+  let match
+
+  while ((match = regex.exec(setlist)) !== null) {
+    artists.push(match[1].trim())
+  }
+
+  return artists
+}
+
+function getArtistsFromSetlistText(text) {
+  // Step 1: Extract the SETLIST section
+  const setlistText = extractSetlistText(text)
+
+  // Step 2: Extract artists from the SETLIST section and filter unique ones
+  if (setlistText) {
+    const artists = extractArtistsFromSetlist(setlistText)
+    // Convert to a Set to filter unique artists, then convert back to an array
+    return [...new Set(artists)]
+  } else {
+    return []
+  }
+}
+
 export async function PUT(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
   if (
@@ -58,6 +97,7 @@ export async function PUT(request: NextRequest) {
       !video.id ||
       !video.snippet ||
       !video.snippet.title ||
+      !video.snippet.description ||
       !video.snippet.thumbnails ||
       !video.snippet.thumbnails.maxres ||
       !video.snippet.thumbnails.maxres.url ||
@@ -76,6 +116,9 @@ export async function PUT(request: NextRequest) {
       _id: video.snippet.resourceId.videoId,
       _type: 'concert',
       title: video.snippet.title,
+      description: getArtistsFromSetlistText(video.snippet.description).join(
+        ', ',
+      ),
       coverImageYTThumbnail: {
         url: video.snippet.thumbnails.maxres.url,
         width: video.snippet.thumbnails.maxres.width,

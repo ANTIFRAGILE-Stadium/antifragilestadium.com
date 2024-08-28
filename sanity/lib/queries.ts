@@ -7,6 +7,7 @@ export const homePageQuery = groq`
     "recentConcerts": *[_type == "concert"][0...6] | order(date desc) {
         _id,
         title,
+        description,
         coverImageYTThumbnail,
         tags,
         site

@@ -28,8 +28,8 @@ export default function ConcertListItem({ data, odd }: ConcertListItemProps) {
           <div className="mb-2 text-xl font-semibold tracking-tight md:text-2xl">
             {data.title}
           </div>
-          <div className="font-serif text-gray-600 dark:text-gray-400">
-            Artists in this mix
+          <div className="text-gray-600 dark:text-gray-400">
+            {data.description}
           </div>
         </div>
         <div>
