@@ -41,6 +41,17 @@ function getArtistsFromSetlistText(text) {
   }
 }
 
+function extractWordBetweenStadiumAndStage(text) {
+  const regex = /AT ANTIFRAGILE STADIUM,\s*(\w+)\s*STAGE/
+  const match = text.match(regex)
+
+  if (match) {
+    return match[1] // The captured word
+  } else {
+    return null // If no match is found
+  }
+}
+
 export async function PUT(request: NextRequest) {
   const authHeader = request.headers.get('authorization')
   if (
@@ -126,7 +137,7 @@ export async function PUT(request: NextRequest) {
       },
       date: video.snippet.publishedAt.split('T')[0],
       site: `https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`,
-      tags: ['TODO'],
+      tags: [extractWordBetweenStadiumAndStage(video.snippet.description)],
     }
 
     sanityMutation.push({
