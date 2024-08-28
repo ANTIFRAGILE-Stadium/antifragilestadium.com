@@ -4,7 +4,7 @@ export const homePageQuery = groq`
   *[_type == "home"][0]{
     _id,
     overview,
-    "recentConcerts": *[_type == "concert"][0...6]{
+    "recentConcerts": *[_type == "concert"][0...6] | order(date desc) {
         _id,
         title,
         coverImageYTThumbnail,
