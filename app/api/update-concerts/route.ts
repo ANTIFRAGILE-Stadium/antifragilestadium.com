@@ -15,8 +15,8 @@ function extractSetlistText(text: string) {
 }
 
 function extractArtistsFromSetlist(setlist: string) {
-  // Regex to extract the artists after the "-" character
-  const regex = /-\s*([^-\n]+)/g
+  // Regex to extract everything after the first "-" character
+  const regex = /-\s*(.+)/g
   const artists: string[] = []
   let match
 
