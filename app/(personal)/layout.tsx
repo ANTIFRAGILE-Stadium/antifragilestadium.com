@@ -49,7 +49,7 @@ export default async function IndexRoute({
 }) {
   return (
     <>
-      <div className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
+      <div className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white mx-auto max-w-[100rem]">
         <Suspense>
           <Navbar />
         </Suspense>
