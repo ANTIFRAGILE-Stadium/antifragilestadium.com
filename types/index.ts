@@ -42,6 +42,7 @@ export interface PagePayload {
   overview?: PortableTextBlock[]
   title?: string
   slug?: string
+  concertsList?: ConcertPayload[]
 }
 
 export interface ProjectPayload {

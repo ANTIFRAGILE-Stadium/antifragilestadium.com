@@ -23,6 +23,17 @@ export const pagesBySlugQuery = groq`
     overview,
     title,
     "slug": slug.current,
+    "concertsList": select(
+      $slug == "concerts" => *[_type == "concert"] | order(date desc) {
+        _id,
+        title,
+        description,
+        coverImageYTThumbnail,
+        tags,
+        site
+      },
+      null
+    )
   }
 `
 

@@ -5,7 +5,7 @@ import { ProjectListItem } from '@/components/pages/home/ProjectListItem'
 import { Header } from '@/components/shared/Header'
 import { resolveHref } from '@/sanity/lib/utils'
 import type { HomePagePayload } from '@/types'
-import ConcertListItem from '@/components/global/Concert/ConcertListItem'
+import ConcertList from '@/components/global/Concert/ConcertList'
 
 export interface HomePageProps {
   data: HomePagePayload | null
@@ -21,15 +21,7 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
       {/* Header */}
       {title && <Header description={overview} />}
       {/* Showcase projects */}
-      {recentConcerts && recentConcerts.length > 0 && (
-        <div className="mr-auto max-w-[100rem] rounded-md border dark:border-gray-600">
-          {recentConcerts.map((concert, i) => (
-            <a href={concert.site} key={concert._id} target="_blank">
-              <ConcertListItem data={concert} odd={i % 2} />
-            </a>
-          ))}
-        </div>
-      )}
+      <ConcertList concerts={recentConcerts} />
     </div>
   )
 }

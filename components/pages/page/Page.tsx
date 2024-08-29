@@ -1,3 +1,4 @@
+import ConcertList from '@/components/global/Concert/ConcertList'
 import { CustomPortableText } from '@/components/shared/CustomPortableText'
 import { Header } from '@/components/shared/Header'
 import type { PagePayload } from '@/types'
@@ -8,7 +9,7 @@ export interface PageProps {
 
 export function Page({ data }: PageProps) {
   // Default to an empty object to allow previews on non-existent documents
-  const { body, overview, title } = data ?? {}
+  const { body, overview, title, concertsList } = data ?? {}
 
   return (
     <div>
@@ -23,6 +24,9 @@ export function Page({ data }: PageProps) {
             value={body}
           />
         )}
+
+        {/* Concerts (only when on "concerts" slug) */}
+        {concertsList && <ConcertList concerts={concertsList} />}
       </div>
       <div className="absolute left-0 w-screen border-t dark:border-gray-600" />
     </div>
