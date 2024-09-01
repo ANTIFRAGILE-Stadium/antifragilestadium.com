@@ -26,7 +26,11 @@ export function Page({ data }: PageProps) {
         )}
 
         {/* Concerts (only when on "concerts" slug) */}
-        {concertsList && <ConcertList concerts={concertsList} />}
+        {concertsList && (
+          <div className="mt-14">
+            <ConcertList concerts={concertsList} />
+          </div>
+        )}
       </div>
       <div className="absolute left-0 w-screen border-t dark:border-gray-600" />
     </div>
