@@ -24,7 +24,7 @@ export default function Navbar(props: NavbarProps) {
               key={key}
               className={`text-lg hover:text-black dark:hover:text-white md:text-xl ${
                 menuItem?._type === 'home'
-                  ? 'font-semibold text-black dark:text-white'
+                  ? 'font-semibold text-black dark:text-white flex-[100%] md:flex-1 text-base leading-[40px]'
                   : 'text-gray-600 dark:text-gray-400'
               }`}
               href={href}
