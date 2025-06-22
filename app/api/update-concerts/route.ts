@@ -120,7 +120,9 @@ export async function PUT(request: NextRequest) {
       maxResults: 50, // Max allowed by YouTube API
     })
   } catch (error) {
-    console.error('Failed to fetch YouTube videos:', error)
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('Failed to fetch YouTube videos:', error)
+    }
     return new Response('Failed to fetch YouTube videos', {
       status: 500,
     })
@@ -136,7 +138,9 @@ export async function PUT(request: NextRequest) {
 
   for (const video of videos.data.items) {
     if (!isValidVideoData(video)) {
-      console.error('Missing data for video ', video.id)
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('Missing data for video ', video.id)
+      }
       continue
     }
 
@@ -179,8 +183,10 @@ export async function PUT(request: NextRequest) {
     .then((res) => res.json())
     .then((data) => {
       if (data.error) {
-        console.error(data)
-        console.error('Items:', data.error.items[0])
+        if (process.env.NODE_ENV !== 'production') {
+          console.error(data)
+          console.error('Items:', data.error.items[0])
+        }
         return new Response('Error updating concerts', {
           status: 500,
         })
@@ -189,7 +195,9 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ success: true })
     })
     .catch((err) => {
-      console.error(err)
+      if (process.env.NODE_ENV !== 'production') {
+        console.error(err)
+      }
       return new Response('Error updating concerts', {
         status: 500,
       })
