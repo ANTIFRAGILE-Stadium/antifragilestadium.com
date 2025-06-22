@@ -1,6 +1,7 @@
 import './globals.css'
 
 import { IBM_Plex_Mono, Inter, PT_Serif } from 'next/font/google'
+import PlausibleProvider from 'next-plausible'
 
 const serif = PT_Serif({
   variable: '--font-sans',
@@ -30,7 +31,9 @@ export default async function RootLayout({
       lang="en"
       className={`${mono.variable} ${sans.variable} ${serif.variable} bg-white dark:bg-black`}
     >
-      <body>{children}</body>
+      <PlausibleProvider domain="antifragilestadium.com">
+        <body>{children}</body>
+      </PlausibleProvider>
     </html>
   )
 }
