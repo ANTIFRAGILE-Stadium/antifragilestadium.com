@@ -34,8 +34,8 @@ export default function ConcertListItem({ data, odd }: ConcertListItemProps) {
         </div>
         <div>
           <div className="mt-4 flex flex-row gap-x-2">
-            {data.tags?.map((tag, key) => (
-              <div className="text-sm font-medium md:text-lg" key={key}>
+            {data.tags?.map((tag) => (
+              <div className="text-sm font-medium md:text-lg" key={tag}>
                 {tag} Stage
               </div>
             ))}

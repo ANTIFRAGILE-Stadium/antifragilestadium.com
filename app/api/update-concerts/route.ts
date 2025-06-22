@@ -27,7 +27,7 @@ function extractArtistsFromSetlist(setlist: string) {
   return artists
 }
 
-function getArtistsFromSetlistText(text) {
+function getArtistsFromSetlistText(text: string): string[] {
   // Step 1: Extract the SETLIST section
   const setlistText = extractSetlistText(text)
 
@@ -41,7 +41,7 @@ function getArtistsFromSetlistText(text) {
   }
 }
 
-function extractWordBetweenStadiumAndStage(text) {
+function extractWordBetweenStadiumAndStage(text: string) {
   const regex = /AT ANTIFRAGILE STADIUM,\s*(\w+)\s*STAGE/
   const match = text.match(regex)
 
@@ -52,7 +52,7 @@ function extractWordBetweenStadiumAndStage(text) {
   }
 }
 
-function getArtistListStringByCommaAndSpaceAndRemoveDuplicates(text) {
+function getArtistListStringByCommaAndSpaceAndRemoveDuplicates(text: string) {
   // Split the string by commas and trim any extra spaces around each item
   const items = text.split(',').map((item) => item.trim())
 
@@ -61,6 +61,24 @@ function getArtistListStringByCommaAndSpaceAndRemoveDuplicates(text) {
 
   // Join the unique items back into a comma-separated string
   return uniqueItems.join(', ')
+}
+
+function isValidVideoData(video: any): boolean {
+  return !(
+    !video.id ||
+    !video.snippet ||
+    !video.snippet.title ||
+    !video.snippet.description ||
+    !video.snippet.thumbnails ||
+    !video.snippet.thumbnails.maxres ||
+    !video.snippet.thumbnails.maxres.url ||
+    !video.snippet.thumbnails.maxres.width ||
+    !video.snippet.thumbnails.maxres.height ||
+    !video.snippet.publishedAt ||
+    !video.snippet.resourceId ||
+    !video.snippet.resourceId.videoId ||
+    !video.snippet.description
+  )
 }
 
 export async function PUT(request: NextRequest) {
@@ -93,14 +111,16 @@ export async function PUT(request: NextRequest) {
     auth: youtubeApiKey,
   })
 
-  const videos = await youtubeClient.playlistItems.list({
-    part: ['snippet'],
-    playlistId: process.env.YOUTUBE_PLAYLIST_ID,
-    maxResults: 50, // Max allowed by YouTube API
-  })
-
-  if (!videos.data.items) {
-    return new Response('No videos found', {
+  let videos
+  try {
+    videos = await youtubeClient.playlistItems.list({
+      part: ['snippet'],
+      playlistId: process.env.YOUTUBE_PLAYLIST_ID,
+      maxResults: 50, // Max allowed by YouTube API
+    })
+  } catch (error) {
+    console.error('Failed to fetch YouTube videos:', error)
+    return new Response('Failed to fetch YouTube videos', {
       status: 500,
     })
   }
@@ -114,22 +134,7 @@ export async function PUT(request: NextRequest) {
   const sanityMutation: SanityMutation<ConcertPayloadMutation>[] = []
 
   for (const video of videos.data.items) {
-    // Check if every key is not null or undefined
-    if (
-      !video.id ||
-      !video.snippet ||
-      !video.snippet.title ||
-      !video.snippet.description ||
-      !video.snippet.thumbnails ||
-      !video.snippet.thumbnails.maxres ||
-      !video.snippet.thumbnails.maxres.url ||
-      !video.snippet.thumbnails.maxres.width ||
-      !video.snippet.thumbnails.maxres.height ||
-      !video.snippet.publishedAt ||
-      !video.snippet.resourceId ||
-      !video.snippet.resourceId.videoId ||
-      !video.snippet.description
-    ) {
+    if (!isValidVideoData(video)) {
       console.error('Missing data for video ', video.id)
       continue
     }
@@ -156,7 +161,9 @@ export async function PUT(request: NextRequest) {
     })
   }
 
-  console.log(sanityMutation)
+  if (process.env.NODE_ENV !== 'production') {
+    console.log(sanityMutation)
+  }
 
   return fetch(sanityMutationUrl, {
     method: 'POST',
