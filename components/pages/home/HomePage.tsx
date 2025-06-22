@@ -20,7 +20,7 @@ export function HomePage({ data, encodeDataAttribute }: HomePageProps) {
     <div className="space-y-20">
       {/* Header */}
       {title && <Header description={overview} />}
-      <h2 className="text-3xl font-semibold tracking-tight md:text-4xl border-b dark:border-gray-600 pb-4">
+      <h2 className="text-xl font-semibold tracking-tight md:text-4xl">
         Recent Concerts
       </h2>
       {/* Showcase projects */}

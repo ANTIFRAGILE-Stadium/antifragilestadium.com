@@ -10,8 +10,8 @@ interface ConcertListItemProps {
 export default function ConcertListItem({ data, odd }: ConcertListItemProps) {
   return (
     <div
-      className={`flex flex-col gap-x-5 p-2 transition hover:bg-gray-50/50 dark:hover:bg-gray-50/10 lg:flex-row ${
-        odd && 'border-b border-t lg:flex-row-reverse dark:border-gray-600'
+      className={`flex flex-col gap-x-5 mb-6 transition hover:underline lg:flex-row ${
+        odd && 'lg:flex-row-reverse'
       }`}
     >
       <div className="w-full lg:w-9/12">
@@ -23,7 +23,7 @@ export default function ConcertListItem({ data, odd }: ConcertListItemProps) {
           classesWrapper="relative aspect-[16/9]"
         />
       </div>
-      <div className="relative mt-2 flex w-full flex-col justify-between p-3 lg:mt-0">
+      <div className="relative mt-2 flex w-full flex-col justify-between lg:mt-0">
         <div>
           <div className="mb-2 text-xl font-semibold tracking-tight md:text-2xl">
             {data.title}

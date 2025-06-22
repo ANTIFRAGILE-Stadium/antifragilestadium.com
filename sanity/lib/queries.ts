@@ -4,7 +4,7 @@ export const homePageQuery = groq`
   *[_type == "home"][0]{
     _id,
     overview,
-    "recentConcerts": *[_type == "concert"] | order(date desc)[0...3] {
+    "recentConcerts": *[_type == "concert"] | order(date desc) {
         _id,
         title,
         description,
