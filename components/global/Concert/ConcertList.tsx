@@ -14,7 +14,7 @@ export default function ConcertList({ concerts }: ConcertListProps) {
       {concerts && concerts.length > 0 && (
         <div className="mr-auto max-w-[100rem]">
           {concerts.map((concert, i) => (
-            <a href={concert.site} key={concert._id} target="_blank">
+            <a href={concert.site} key={concert._id} target="_blank" rel="noopener noreferrer">
               <ConcertListItem data={concert} odd={i % 2} />
             </a>
           ))}
