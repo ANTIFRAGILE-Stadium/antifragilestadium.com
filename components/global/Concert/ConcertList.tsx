@@ -1,6 +1,8 @@
 import React from 'react'
-import ConcertListItem from './ConcertListItem'
+
 import { ConcertPayload } from '@/types'
+
+import ConcertListItem from './ConcertListItem'
 
 interface ConcertListProps {
   concerts: ConcertPayload[]

@@ -1,6 +1,7 @@
+import React from 'react'
+
 import ImageBox from '@/components/shared/ImageBox'
 import { ConcertPayload } from '@/types'
-import React from 'react'
 
 interface ConcertListItemProps {
   data: ConcertPayload

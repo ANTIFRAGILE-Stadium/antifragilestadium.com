@@ -1,6 +1,7 @@
-import { ConcertPayloadMutation, SanityMutation } from '@/types'
 import { youtube } from '@googleapis/youtube'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { ConcertPayloadMutation, SanityMutation } from '@/types'
 
 function extractSetlistText(text: string) {
   // Regex to extract everything under "SETLIST"
@@ -153,7 +154,7 @@ export async function PUT(request: NextRequest) {
       },
       date: video.snippet.publishedAt.split('T')[0],
       site: `https://www.youtube.com/watch?v=${video.snippet.resourceId.videoId}`,
-      tags: [extractWordBetweenStadiumAndStage(video.snippet.description)],
+      tags: [extractWordBetweenStadiumAndStage(video.snippet.description)].filter((tag): tag is string => tag !== null),
     }
 
     sanityMutation.push({

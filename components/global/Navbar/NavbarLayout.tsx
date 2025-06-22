@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
+import Logo from '@/components/shared/Logo'
 import { resolveHref } from '@/sanity/lib/utils'
 import type { MenuItem, SettingsPayload } from '@/types'
-import Logo from '@/components/shared/Logo'
 
 interface NavbarProps {
   data: SettingsPayload
