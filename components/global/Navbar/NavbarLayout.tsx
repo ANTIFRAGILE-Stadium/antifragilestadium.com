@@ -12,7 +12,9 @@ export default function Navbar(props: NavbarProps) {
   const menuItems = data?.menuItems || ([] as MenuItem[])
   return (
     <div className="sticky top-0 z-10 flex flex-wrap items-center gap-x-5 bg-white dark:bg-black px-4 py-4 md:px-16 md:py-5 lg:px-32">
-      <Logo height="30px" className="fill-black dark:fill-white" />
+      <Link href="/">
+        <Logo height="30px" className="fill-black dark:fill-white" />
+      </Link>
       {menuItems &&
         menuItems.map((menuItem, key) => {
           const href = resolveHref(menuItem?._type, menuItem?.slug)
