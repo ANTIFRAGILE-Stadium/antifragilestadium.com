@@ -32,7 +32,7 @@ export interface ShowcaseProject {
 export interface HomePagePayload {
   footer?: PortableTextBlock[]
   overview?: PortableTextBlock[]
-  showcaseProjects?: ShowcaseProject[]
+  recentConcerts?: ConcertPayload[]
   title?: string
 }
 
@@ -42,6 +42,7 @@ export interface PagePayload {
   overview?: PortableTextBlock[]
   title?: string
   slug?: string
+  concertsList?: ConcertPayload[]
 }
 
 export interface ProjectPayload {
@@ -63,4 +64,27 @@ export interface SettingsPayload {
   footer?: PortableTextBlock[]
   menuItems?: MenuItem[]
   ogImage?: Image
+}
+
+export interface ConcertPayload {
+  _id: string
+  title: string
+  description: string
+  coverImageYTThumbnail: {
+    url: string
+    width: number
+    height: number
+  }
+  date: string
+  site: string
+  tags: string[]
+}
+
+export interface ConcertPayloadMutation extends ConcertPayload {
+  _id: string
+  _type: 'concert'
+}
+
+export interface SanityMutation<T> {
+  createOrReplace: T
 }

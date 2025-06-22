@@ -3,7 +3,7 @@ import './globals.css'
 import { IBM_Plex_Mono, Inter, PT_Serif } from 'next/font/google'
 
 const serif = PT_Serif({
-  variable: '--font-serif',
+  variable: '--font-sans',
   style: ['normal', 'italic'],
   subsets: ['latin'],
   weight: ['400', '700'],
@@ -28,7 +28,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${mono.variable} ${sans.variable} ${serif.variable}`}
+      className={`${mono.variable} ${sans.variable} ${serif.variable} bg-white dark:bg-black`}
     >
       <body>{children}</body>
     </html>

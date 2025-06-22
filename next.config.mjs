@@ -3,7 +3,7 @@ const config = {
   images: {
     remotePatterns: [
       { hostname: 'cdn.sanity.io' },
-      { hostname: 'source.unsplash.com' },
+      { hostname: 'i.ytimg.com' },
     ],
   },
   typescript: {

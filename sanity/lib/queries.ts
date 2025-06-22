@@ -4,14 +4,14 @@ export const homePageQuery = groq`
   *[_type == "home"][0]{
     _id,
     overview,
-    showcaseProjects[]->{
-      _type,
-      coverImage,
-      overview,
-      "slug": slug.current,
-      tags,
-      title,
-    },
+    "recentConcerts": *[_type == "concert"] | order(date desc) {
+        _id,
+        title,
+        description,
+        coverImageYTThumbnail,
+        tags,
+        site
+      },
     title,
   }
 `
@@ -23,6 +23,17 @@ export const pagesBySlugQuery = groq`
     overview,
     title,
     "slug": slug.current,
+    "concertsList": select(
+      $slug == "concerts" => *[_type == "concert"] | order(date desc) {
+        _id,
+        title,
+        description,
+        coverImageYTThumbnail,
+        tags,
+        site
+      },
+      null
+    )
   }
 `
 
