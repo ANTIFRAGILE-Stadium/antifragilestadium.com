@@ -31,7 +31,7 @@ export default async function RootLayout({
       lang="en"
       className={`${mono.variable} ${sans.variable} ${serif.variable} bg-white dark:bg-black`}
     >
-      <PlausibleProvider domain="antifragilestadium.com">
+      <PlausibleProvider domain="antifragilestadium.com" trackOutboundLinks>
         <body>{children}</body>
       </PlausibleProvider>
     </html>
